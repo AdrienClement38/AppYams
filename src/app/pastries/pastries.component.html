@@ -1,0 +1,59 @@
+<div>
+
+    <app-search (searchedResult)="foundPastries($event)"></app-search>
+
+    <h1> {{ titlePage }} </h1>
+
+    <div style="display: flex;">
+
+        <div>
+            <app-pastrie-details [pastrie]="selectedPastrie"></app-pastrie-details>
+        </div>
+
+        <div class="col">
+            <ul style="list-style: none;" *ngIf='pastries'>
+
+                <li style="margin-bottom: 20px;" *ngFor="let pastrie of pastries">
+                    <div class="card" appBorderCard="red" style="width: 70rem;">
+
+                        <div class="card-header">
+                            {{ pastrie.ref }}
+                        </div>
+
+                        <div class="card-body">
+                            <h5 class="card-title">{{ pastrie.name }}</h5>
+
+                            <p class="card-text">{{ pastrie.description }}</p>
+
+                            <ul style="list-style: none; margin-bottom: 10px;" class="list-inlibe" *ngIf="pastrie.tags">
+                                <li class="list-inline-item" *ngFor="let tag of pastrie.tags">
+                                    <span class=" {{ tag | pastrieTagColor }} badge text-bg-primary"> {{ tag }} </span>
+                                </li>
+                            </ul>
+
+                            <div class="d-xl-inline-flex">
+
+                                <a class="btn btn-outline-dark" href="#" role="button" style="margin-right: 20px;">fr</a>
+
+                                <ng-template [ngIf]="pastrie.like">
+                                    
+                                    <button type="button" class="btn btn-primary btn-sm" style="font-size: .75rem; margin-right: 10px;" alt='like'>like</button>
+                                    <small> {{ pastrie.like }} </small>
+
+                                </ng-template>
+
+                                <ng-template [ngIf]="pastrie.quantity">
+
+                                    <p style="margin-left: 20px; margin-right: 10px;" alt="disponibility">--></p>                        
+                                    <small> {{ pastrie.quantity }} </small>
+
+                                </ng-template>
+                            </div>
+                        </div>
+                    </div>
+                    <button (click)="getPastrie(pastrie.id)" class="rounded" style="margin: 10px;">Details</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

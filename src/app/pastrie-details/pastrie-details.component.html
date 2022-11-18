@@ -1,0 +1,36 @@
+<div *ngIf="pastrie">
+    {{ pastrie.name }}
+
+    <div class="card" *ngIf="pastrie" style="width: 300px;">
+
+        <img *ngIf="pastrie.url" class="card-img-top" [src]="pastrie.url" alt="Pastrie Category">
+
+        <div class="card-body">
+
+            <h5 class="card-title">{{ pastrie.ref }}</h5>
+
+            <p class="card-text"> Name : {{ pastrie.name }}</p>
+
+        </div>
+
+        <ul class="list-group" *ngIf="ingredients">
+
+            <h4>Liste des ingrédients</h4>
+
+            <button (click)="sortIngredients()"> {{ sortRef }} </button>
+            <button (click)="hideIngredients()">hide</button>
+
+            <li *ngFor="let ingredient of ingredients" class="list-group-item">
+                {{ingredient}}
+                <span (click)="deleteIngredient([ingredient])" style="cursor: pointer;">X</span>
+            </li>
+
+        </ul>
+
+        <label for='label {{ pastrie.id }}'>Ajouter un ingredient</label>
+
+        <input name="label{{pastrie.id}}" type="text" (keyup)="0" #saisieClavier (keyup.enter)="addIngredient($event)">
+        <p>{{saisieClavier.value}}</p>
+
+    </div>
+</div>
